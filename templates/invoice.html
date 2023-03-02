@@ -63,9 +63,11 @@
       }
 
       .logo {
-        height: 1.5rem;
-        width: auto;
-        margin-right: 1rem;
+        height: 4rem;
+        width: 4rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .logotype {
@@ -74,18 +76,7 @@
         font-weight: 700;
       }
 
-      h2 {
-        font-family: "Space Mono", monospace;
-        font-size: 1.25rem;
-        font-weight: 400;
-      }
-
-      h4 {
-        font-family: "Space Mono", monospace;
-        font-size: 1rem;
-        font-weight: 400;
-      }
-
+      
       .page {
         margin-left: 5rem;
         margin-right: 5rem;
@@ -203,8 +194,16 @@
 
       .table-box td:first-child,
       .summary-box td:first-child {
-        width: 50%;
+        width: 55%;
       }
+      .summary-box table tr td:nth-child(2) {
+				text-align: left;
+			}
+
+      .summary-box table tr td:nth-child(3) {
+				text-align: right;
+			}
+
 
       .table-box td:last-child,
       .summary-box td:last-child {
@@ -265,45 +264,42 @@
     <div id="pspdfkit-header">
       <div class="header-columns">
         <div class="logotype">
-          <img class="logo" src="logo.svg" />
-          <p>Company</p>
+          <img class="logo" src="logo.png" />
+          <p>Directly2Dentists.com</p>
         </div>
 
         <div>
-          <p>[Company Info]</p>
+          <p>Toronto, ON<br />
+          </p>
         </div>
       </div>
     </div>
 
     <div class="page" style="page-break-after: always">
       <div>
-        <h2>Receipt #</h2>
+        <h2>Receipt #: {{ id_number }}</h2>
+        <h4>Account #: {{ account_number }}</h4>
       </div>
 
-      <div class="intro-table">
-        <div class="intro-form intro-form-item">
-          <p class="intro-table-title">Billed To:</p>
-          <p>
-            Company Ltd.<br />
-            Address<br />
-            Country<br />
-            VAT ID: ATU12345678
-          </p>
-        </div>
-
-        <div class="intro-form">
+          <div class="intro-form-item-border">
+            <p class="intro-table-title">Billed To:</p>
+            <p>
+              {{ company }}<br />
+              {{ address }}<br />
+            </p>
+          </div>
+  
           <div class="intro-form-item-border">
             <p class="intro-table-title">Payment Date:</p>
-            <p>November 22nd 2021</p>
+            <p>{{ due_date }}</p>
           </div>
 
           <div class="intro-form-item-border">
             <p class="intro-table-title">Payment Method:</p>
-            <p>Bank Transfer</p>
+            <p>{{ payment_method }}</p>
           </div>
-        </div>
-      </div>
-
+          <br />
+          <br />
       <div class="table-box">
         <table cellpadding="0" cellspacing="0">
           <tbody>
@@ -313,41 +309,14 @@
               <td>Unit Price</td>
               <td>Total</td>
             </tr>
-
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            {% for item in items %}
+              <tr class="item">
+                <td>{{ item.description }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.unit_price }}</td>
+                <td>${{ item.total }}</td>
+              </tr>
+            {% endfor %}
 
             <tr class="item">
               <td></td>
@@ -365,82 +334,40 @@
             <tr class="item">
               <td></td>
               <td>Subtotal:</td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td>Discount:</td>
-              <td></td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td>Subtotal Less Discount:</td>
-              <td></td>
+              <td>{{ subtotal }}</td>
             </tr>
 
             <tr class="item">
               <td></td>
               <td>Tax Rate:</td>
-              <td></td>
+              <td>{{ tax_rate }}</td>
             </tr>
 
             <tr class="item">
               <td></td>
               <td>Total Tax:</td>
-              <td></td>
+              <td>{{ tax }}</td>
             </tr>
 
             <tr class="item">
               <td></td>
               <td>Shipping/Handling:</td>
-              <td></td>
+              <td>{{ shipping }}</td>
             </tr>
 
             <tr class="no-border-item">
               <td></td>
               <td>Total Due:</td>
-              <td></td>
+              <td>{{ total }}</td>
             </tr>
 
             <tr class="total">
               <td></td>
               <td>Amount Paid:</td>
-              <td></td>
+              <td>{{ paid }}</td>
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <div class="page" style="page-break-after: always">
-      <div>
-        <h4>Thank you for your purchase!</h4>
-      </div>
-
-      <div class="form">
-        <label for="notes" class="label"> Notes: </label>
-        <input type="text" id="notes" class="border-bottom" value="" />
-      </div>
-
-      <div class="signer">
-        <div class="form signer-item">
-          <label for="date" class="label">Date:</label>
-          <input type="text" id="date" class="border-bottom" value="01/01/2021" />
-        </div>
-
-        <div class="form signer-item">
-          <label for="signature" class="label">Issued by:</label>
-          <input type="text" id="signature" class="border" value="Sign Here" />
-        </div>
-      </div>
-    </div>
-
-    <div id="pspdfkit-footer">
-      <div class="footer-columns">
-        <span>Receipt</span>
-        <span>Page {{ pageNumber }} of {{ pageCount }}</span>
       </div>
     </div>
   </body>
