@@ -7,7 +7,7 @@
 
 '''sh
 docker build --tag python-docker .
-docker run -dp 5000:5000 \
+docker run -dp 8080:8080 \
     -w /app -v "$(pwd):/app" \
     python-docker
 '''
