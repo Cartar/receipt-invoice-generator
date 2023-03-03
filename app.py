@@ -26,38 +26,49 @@ def get_headers():
         "shipping": request.headers.get('shipping'),
         "total": request.headers.get('total'),
         "paid": request.headers.get('paid'),
+        "description": request.headers.get('description'),
+        "quantity": request.headers.get('quantity'),
+        "unit_price": request.headers.get('unit_price'),
+        "item_total": request.headers.get('item_total'),
     }
     
     # Organize the list of items sent:
     items = []
-    description = request.headers.get('description')
-    quantity = request.headers.get('quantity')
-    unit_price = request.headers.get('unit_price')
-    item_total = request.headers.get('item_total')
-    
     # Assuming if description has content, they all do:
-    if description:
-        description.split('","')
-        quantity.split('","')
-        unit_price.split('","')
-        item_total.split('","')
-        for i, _ in enumerate(description):
-            items.append(
-                {
-                    "description": description[i],
-                    "quantity": quantity[i],
-                    "unit_price": unit_price[i],
-                    "item_total": item_total[i],
-                }
-            )
-
+    if content["description"]:
+        try:
+            description = content["description"].split('","')
+            quantity = content["quantity"].split('","')
+            unit_price = content["unit_price"].split('","')
+            item_total = content["item_total"].split('","')
+            for i, _ in enumerate(description):
+                items.append(
+                    {
+                        "description": description[i],
+                        "quantity": quantity[i],
+                        "unit_price": unit_price[i],
+                        "item_total": item_total[i],
+                    }
+                )
+        except:
+            print("description, quantity, unit_price, and item_total missmatch")
     content["items"] = items
     
     return content
 
+
 def cleanup_old_files():
     #TODO
     return None
+
+
+@app.route('/test_headers')
+def test_headers():
+    # Get headers that are sent:
+    content = get_headers()
+    
+    return content, 200
+
 
 @app.route('/receipt')
 def send_receipt():

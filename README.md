@@ -41,6 +41,14 @@ pip install flask
 ### Appendix C: testing with Curl
 
 '''sh
-curl -o test.pdf http://localhost:5000/receipt \
-   -H "subtotal: 300"
+curl http://localhost:8080/test_headers \
+   -H "subtotal: 300" \
+   -H 'description: this","foryou' \
+   -H 'quantity: this","foryou' \
+   -H 'unit_price: this","foryou' \
+   -H 'item_total: this","foryou'
+
+curl -o test.pdf http://localhost:8080/receipt \
+   -H "subtotal: 300" 
 '''
+
