@@ -14,7 +14,9 @@ def hello_world():
 def get_headers():
     content ={
         "company": request.headers.get('company'),
-        "address": request.headers.get('address'),
+        "address_line1": request.headers.get('address_line1'),
+        "address_line2": request.headers.get('address_line2'),
+        "address_line3": request.headers.get('address_line3'),
         "id_number": request.headers.get('id_number'),
         "account_number": request.headers.get('account_number'),
         "payment_date": request.headers.get('payment_date'),
