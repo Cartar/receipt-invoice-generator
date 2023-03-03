@@ -124,6 +124,32 @@ def send_invoice():
     return send_file(entry), 200
 
 
+@app.route('/refund')
+def send_refund():
+    # Get headers that are sent:
+    content = get_headers()
+
+    environment = Environment(loader=FileSystemLoader("templates/"))
+    template = environment.get_template("refund.html")
+    rendered_html = template.render(
+        content,
+    )
+    
+    filename = f"refund_{content['id_number']}.html"
+    filename_pdf = f"refund_{content['id_number']}.pdf"
+    with open(filename, mode="w", encoding="utf-8") as message:
+        message.write(rendered_html)
+    
+    pdfkit.from_file(filename, filename_pdf, options={"enable-local-file-access": ""})
+    entry = os.path.join(os.getcwd(), filename_pdf)
+
+    # Cleanup function that looks for files with id_numbers
+    # less than 100 the current value:
+    ##cleanup_old_files()
+    
+    return send_file(entry), 200
+
+
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
     app.run(debug=False, port=server_port, host='0.0.0.0')

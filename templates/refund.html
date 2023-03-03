@@ -277,7 +277,7 @@
 
     <div class="page" style="page-break-after: always">
       <div>
-        <h2>Invoice</h2>
+        <h2>Refund</h2>
         <h4>Order #: {{ id_number }}</h4>
         <h4>Account #: {{ account_number }}</h4>
       </div>
@@ -291,14 +291,7 @@
               {{ address_line3 }}<br />
             </p>
           </div>
-
-          {% if due_date %}
-          <div class="intro-form-item-border">
-            <p class="intro-table-title">Invoice Due By:</p>
-            <p>{{ due_date }}</p>
-          </div>
-          {% endif %}
-          {% if payment_date %}
+  
           <div class="intro-form-item-border">
             <p class="intro-table-title">Payment Method:</p>
             <p>{{ payment_method }}</p>
@@ -306,7 +299,6 @@
             <p class="intro-table-title">Payment Date:</p>
             <p>{{ payment_date }}</p>
           </div>
-          {% endif %}
 
           <br />
       <div class="table-box">
@@ -316,7 +308,7 @@
               <td>Description</td>
               <td>QTY</td>
               <td>Unit Price</td>
-              <td>Total</td>
+              <td>Total Credits</td>
             </tr>
             {% for item in items %}
               <tr class="item">
@@ -342,8 +334,8 @@
           <tbody>
             <tr class="item">
               <td></td>
-              <td>Subtotal:</td>
-              <td>{{ subtotal }}</td>
+              <td>Subtotal Credits:</td>
+              <td>({{ subtotal }})</td>
             </tr>
 
             <tr class="item">
@@ -354,26 +346,20 @@
 
             <tr class="item">
               <td></td>
-              <td>Total Tax:</td>
-              <td>{{ tax }}</td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td>Shipping/Handling:</td>
-              <td>{{ shipping }}</td>
+              <td>Total Tax Credits:</td>
+              <td>({{ tax }})</td>
             </tr>
 
             <tr class="no-border-item">
               <td></td>
-              <td>Total Due:</td>
-              <td>{{ total }}</td>
+              <td>Shipping/Handling Credits:</td>
+              <td>({{ shipping }})</td>
             </tr>
 
             <tr class="total">
               <td></td>
-              <td>Amount Paid:</td>
-              <td>{{ paid }}</td>
+              <td>Total Refund:</td>
+              <td>({{ total }})</td>
             </tr>
           </tbody>
         </table>

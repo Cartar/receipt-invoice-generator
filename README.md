@@ -50,5 +50,14 @@ curl http://localhost:8080/test_headers \
 
 curl -o test.pdf http://localhost:8080/receipt \
    -H "subtotal: 300" 
+
+curl -o test.pdf http://localhost:8080/invoice \
+   -H "subtotal: 300" \
+   -H "due_date: Thursday 12, 12, 2024" \
+   -H "payment_date: Thursday 12, 12, 2024" \
+   -H "payment_method: EFT" 
+
+curl -o test.pdf http://localhost:8080/refund \
+   -H "subtotal: 300" 
 '''
 
