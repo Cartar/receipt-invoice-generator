@@ -60,4 +60,3 @@ curl -o test.pdf http://localhost:8080/invoice \
 curl -o test.pdf http://localhost:8080/refund \
    -H "subtotal: 300" 
 '''
-

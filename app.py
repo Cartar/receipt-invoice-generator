@@ -102,6 +102,8 @@ def send_receipt():
 def send_invoice():
     # Get headers that are sent:
     content = get_headers()
+    if str(content["payment_date"]).strip("'").strip('"') == "0":
+        content["payment_date"] = None
 
     environment = Environment(loader=FileSystemLoader("templates/"))
     template = environment.get_template("invoice.html")
