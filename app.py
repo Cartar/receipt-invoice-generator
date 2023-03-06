@@ -14,9 +14,9 @@ def hello_world():
 def get_headers():
     content ={
         "company": request.headers.get('company'),
-        "address_line1": request.headers.get('address_line1'),
-        "address_line2": request.headers.get('address_line2'),
-        "address_line3": request.headers.get('address_line3'),
+        "address_line1": request.headers.get('address_1'),
+        "address_line2": request.headers.get('address_2'),
+        "address_line3": request.headers.get('address_3'),
         "id_number": request.headers.get('id_number'),
         "account_number": request.headers.get('account_number'),
         "payment_date": request.headers.get('payment_date'),
@@ -39,10 +39,10 @@ def get_headers():
     # Assuming if description has content, they all do:
     if content["description"]:
         try:
-            description = content["description"].split('","')
-            quantity = content["quantity"].split('","')
-            unit_price = content["unit_price"].split('","')
-            item_total = content["item_total"].split('","')
+            description = content["description"].split(",")
+            quantity = content["quantity"].split(",")
+            unit_price = content["unit_price"].split(",")
+            item_total = content["item_total"].split(",")
             for i, _ in enumerate(description):
                 items.append(
                     {
