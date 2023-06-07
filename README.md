@@ -12,7 +12,7 @@ docker run -dp 8080:8080 \
     python-docker
 '''
 
-Use the Docker GUI to delete images when done.
+Use the Docker GUI to delete images when done
 
 
 ### Appendix A: Docker logs
