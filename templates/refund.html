@@ -301,68 +301,15 @@
             <p class="intro-table-title">Payment Method:</p>
             <p>{{ payment_method }}</p>
             <br />
-            <p class="intro-table-title">Payment Date:</p>
-            <p>{{ payment_date }}</p>
+            <p class="intro-table-title">Refund Date:</p>
+            <p>{{ refund_date }}</p>
+            <br />
+            <p class="intro-table-title">Total Refund:</p>
+            <p>${{ amount_refunded }}</p>
           </div>
 
           <br />
-      <div class="table-box">
-        <table cellpadding="0" cellspacing="0">
-          <tbody>
-            <tr class="heading">
-              <td>Description</td>
-              <td>QTY</td>
-              <td>Unit Price</td>
-              <td>Total Credits</td>
-            </tr>
-            {% for item in items %}
-              <tr class="item">
-                <td>{{ item.description }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>${{ item.unit_price }}</td>
-                <td>${{ item.item_total }}</td>
-              </tr>
-            {% endfor %}
 
-            <tr class="item">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="summary-box">
-        <table cellpadding="0" cellspacing="0">
-          <tbody>
-            <tr class="item">
-              <td></td>
-              <td>Subtotal Credits:</td>
-              <td>(${{ subtotal }})</td>
-            </tr>
-
-            <tr class="item">
-              <td></td>
-              <td>Shipping/Handling Credits:</td>
-              <td>(${{ shipping }})</td>
-            </tr>
-
-            <tr class="no-border-item">
-              <td></td>
-              <td>Total Tax Credits ({{ tax_rate }}%):</td>
-              <td>(${{ tax }})</td>
-            </tr>
-
-            <tr class="total">
-              <td></td>
-              <td>Total Refund:</td>
-              <td>(${{ total }})</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </body>
 </html>

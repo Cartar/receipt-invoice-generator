@@ -32,6 +32,8 @@ def get_headers():
         "quantity": request.headers.get('quantity'),
         "unit_price": request.headers.get('unit_price'),
         "item_total": request.headers.get('item_total'),
+        "refund_date": request.headers.get('refund_date'),
+        "amount_refunded": request.headers.get('amount_refunded'),
     }
     
     # Organize the list of items sent:
